@@ -1,0 +1,600 @@
+/* === 佈景主題與全域變數設定 === */
+:root {
+    --bg-primary: #0b0f19;      /* 極深藍底色 */
+    --bg-secondary: #111827;    /* 卡片/區塊微深色 */
+    --bg-card: #1f2937;         /* 卡片背景顏色 */
+    --text-primary: #f8fafc;    /* 主文字白灰色 */
+    --text-secondary: #94a3b8;  /* 次要文字灰藍色 */
+    --primary-color: #3b82f6;   /* 亮藍色 */
+    --accent-color: #8b5cf6;    /* 亮紫色 */
+    --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    --border-color: #374151;    /* 框線色 */
+    --nav-height: 70px;         /* 導覽列固定高度 */
+    --border-radius: 12px;
+}
+
+/* === CSS 重置與基礎設定 === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* 點擊錨點平滑捲動 */
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden; /* 隱藏水平卷軸避免破版 */
+}
+
+/* 共通容器區塊 */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
+/* 科技感漸層文字效果工具類別 */
+.gradient-text {
+    background: var(--gradient-bg);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* === 1. 導覽列 (Navbar) === */
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: rgba(11, 15, 25, 0.85); /* 半透明背景 */
+    backdrop-filter: blur(10px); /* 後方毛玻璃模糊效果 */
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+#navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* 頁面往下滾時加入陰影區隔 */
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+/* 滑鼠 Hover 底部線條展開動畫 */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-bg);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none; /* 桌面版隱藏漢堡按鈕 */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* === 2. 主視覺區 (Hero Section) === */
+.hero-section {
+    position: relative;
+    padding-top: var(--nav-height);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 2; /* 確保文字跟圖片在光暈前方 */
+}
+
+.hero-text {
+    flex: 1;
+    padding-right: 50px;
+}
+
+.greeting {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.name {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.bio {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icon:hover {
+    background: var(--gradient-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.hero-image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* 圖片外框呼吸燈漸層盤懸浮動畫 */
+.image-border {
+    position: relative;
+    border-radius: 50%;
+    padding: 6px;
+    background: var(--gradient-bg);
+    animation: float 6s ease-in-out infinite;
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.2);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+.hero-image {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-primary); /* 中間鏤空邊框效果 */
+    display: block;
+}
+
+/* 背景模糊光暈特效 */
+.glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.4;
+}
+
+.glow-1 {
+    top: 10%;
+    left: -100px;
+    background: rgba(59, 130, 246, 0.4);
+}
+
+.glow-2 {
+    bottom: -50px;
+    right: -100px;
+    background: rgba(139, 92, 246, 0.4);
+}
+
+
+/* === 3. 關於我卡片區塊 (About Me) === */
+.about-section {
+    padding: 100px 0;
+    background-color: var(--bg-secondary);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: var(--bg-card);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: var(--gradient-bg);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.card p {
+    color: var(--text-secondary);
+}
+
+
+/* === 4. 經歷時間軸 (Timeline) === */
+.timeline-section {
+    padding: 100px 0;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 直切的軸線 */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: var(--border-color);
+    top: 0;
+    bottom: 0;
+    left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 60px;
+}
+
+/* 時間軸發光綠/藍點 */
+.timeline-dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    left: 13px; /* 置平軸線 */
+    top: 5px;
+    z-index: 2;
+    box-shadow: 0 0 12px var(--primary-color);
+}
+
+.timeline-content {
+    background-color: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.timeline-content:hover {
+    transform: translateX(5px);
+    border-color: var(--accent-color);
+}
+
+.timeline-year {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.timeline-title {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.timeline-content p {
+    color: var(--text-secondary);
+}
+
+
+/* === 5. 聯絡表單 (Contact Form) === */
+.contact-section {
+    padding: 100px 0;
+    background-color: var(--bg-secondary);
+}
+
+.contact-wrapper {
+    display: flex;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+/* 左側資訊區 */
+.contact-info {
+    flex: 1;
+    padding: 50px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.15));
+    border-right: 1px solid var(--border-color);
+}
+
+.contact-info h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.contact-list {
+    list-style: none;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.contact-list i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    width: 30px; /* 對齊圖示 */
+    text-align: center;
+}
+
+/* 右側表單區 */
+.contact-form {
+    flex: 1.5;
+    padding: 50px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05); /* 半透明輸入框 */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.submit-btn {
+    background: var(--gradient-bg);
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+
+/* === 6. Footer 頁尾 === */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* === 7. 現代化動畫 (進場特效) === */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate { /* JS 賦予觸發動畫的 class */
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+
+/* === 8. RWD 響應式設計 (平板/手機版) === */
+@media screen and (max-width: 992px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+    .contact-info {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* 主視覺改變排版 */
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    .hero-text {
+        padding-right: 0;
+        margin-bottom: 50px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .bio {
+        margin: 0 auto 2rem auto;
+    }
+
+    .name {
+        font-size: 3rem;
+    }
+
+    .hero-image {
+        width: 250px;
+        height: 250px;
+    }
+    
+    /* 導覽列改成漢堡選單 */
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: var(--nav-height);
+        left: -100%; /* 螢幕外隱藏 */
+        width: 100%;
+        background-color: rgba(11, 15, 25, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 0;
+        transition: left 0.3s ease;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nav-links.active {
+        left: 0; /* 滑動顯示 */
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px 0;
+    }
+    
+    .nav-links a::after {
+        display: none;
+    }
+}
